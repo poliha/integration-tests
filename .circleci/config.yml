@@ -6,7 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: golang:1.6.4-jessie
+      - image: circleci/node:7.10
 
 
     working_directory: ~/repo
