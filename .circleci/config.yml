@@ -24,8 +24,8 @@ jobs:
           docker_layer_caching: true
 
       - run:
-        - name: "Run script.sh"
-        - command: ./script,sh
+        - name: Run script.sh
+        - command: ./script.sh
       # # Download and cache dependencies
       # - restore_cache:
       #     keys:
