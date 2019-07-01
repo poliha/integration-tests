@@ -8,13 +8,19 @@ jobs:
     machine: true
     # docker:
       # - image: circleci/node:7.10
-      environment:
-        FI1_BRIDGE_VERSION: v0.0.28
-        FI2_BRIDGE_VERSION: master
+      # environment:
+      #   FI1_BRIDGE_VERSION: v0.0.28
+      #   FI2_BRIDGE_VERSION: master
 
     working_directory: ~/repo
 
     steps:
+      - run: 
+          name: "Setup custom environment variables"
+          command: |
+            echo 'export FI1_BRIDGE_VERSION="v0.0.28"' >> $BASH_ENV
+            echo 'export FI2_BRIDGE_VERSION="master"' >> $BASH_ENV
+
       - checkout
       - run: 
           name: Install nvm
