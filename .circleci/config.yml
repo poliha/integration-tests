@@ -28,11 +28,11 @@ jobs:
             echo ${FI2_BRIDGE_VERSION}
 
       - checkout
-      - run: 
-          name: Install node version
-          command: |
-            nvm install 7.10
-            nvm use node
+      # - run: 
+      #     name: Install node version
+      #     command: |
+      #       nvm install 7.10 
+      #       nvm alias default 7.10
       # - run: 
       #     name: Install nvm
       #     command: |
