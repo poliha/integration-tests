@@ -21,16 +21,27 @@ jobs:
             echo 'export FI1_BRIDGE_VERSION="v0.0.28"' >> $BASH_ENV
             echo 'export FI2_BRIDGE_VERSION="master"' >> $BASH_ENV
 
+      - run: 
+          name: "Check custom environment variables"
+          command: |
+            echo ${FI1_BRIDGE_VERSION}
+            echo ${FI2_BRIDGE_VERSION}
+
       - checkout
       - run: 
-          name: Install nvm
+          name: Install node version
           command: |
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-            export NVM_DIR="${XDG_CONFIG_HOME/:-$HOME/.}nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            command -v nvm
             nvm install 7.10
             nvm use node
+      # - run: 
+      #     name: Install nvm
+      #     command: |
+      #       curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+      #       export NVM_DIR="${XDG_CONFIG_HOME/:-$HOME/.}nvm"
+      #       [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+      #       command -v nvm
+      #       nvm install 7.10
+      #       nvm use node
       - run: npm install
 
       # - setup_remote_docker:
