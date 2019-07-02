@@ -3,48 +3,90 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
+
+commands: 
+
+  run_test:
+    steps:
+      - checkout
+      - run: npm install
+      - run: ./script.sh
+
 jobs:
-  build:
+  test_v28_master:
     machine: true
-    # docker:
-      # - image: circleci/node:7.10
-      # environment:
-      #   FI1_BRIDGE_VERSION: v0.0.28
-      #   FI2_BRIDGE_VERSION: master
-
     working_directory: ~/repo
-
     steps:
       - run: 
           name: "Setup custom environment variables"
           command: |
             echo 'export FI1_BRIDGE_VERSION="v0.0.28"' >> $BASH_ENV
             echo 'export FI2_BRIDGE_VERSION="master"' >> $BASH_ENV
-
       - run: 
           name: "Check custom environment variables"
           command: |
             echo ${FI1_BRIDGE_VERSION}
             echo ${FI2_BRIDGE_VERSION}
+      - run_test
+  test_v29_master:
+    machine: true
+    working_directory: ~/repo
+    steps:
+      - run: 
+          name: "Setup custom environment variables"
+          command: |
+            echo 'export FI1_BRIDGE_VERSION="v0.0.29"' >> $BASH_ENV
+            echo 'export FI2_BRIDGE_VERSION="master"' >> $BASH_ENV
+      - run: 
+          name: "Check custom environment variables"
+          command: |
+            echo ${FI1_BRIDGE_VERSION}
+            echo ${FI2_BRIDGE_VERSION}
+      - run_test  
 
-      - checkout
-      # - run: 
-      #     name: Install node version
-      #     command: |
-      #       nvm install 7.10 
-      #       nvm alias default 7.10
-      # - run: 
-      #     name: Install nvm
-      #     command: |
-      #       curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-      #       export NVM_DIR="${XDG_CONFIG_HOME/:-$HOME/.}nvm"
-      #       [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-      #       command -v nvm
-      #       nvm install 7.10
-      #       nvm use node
-      - run: npm install
 
-      # - setup_remote_docker:
-      - run: ./script.sh
+# jobs:
+#   build:
+#     machine: true
+#     # docker:
+#       # - image: circleci/node:7.10
+#       # environment:
+#       #   FI1_BRIDGE_VERSION: v0.0.28
+#       #   FI2_BRIDGE_VERSION: master
+
+#     working_directory: ~/repo
+
+#     steps:
+#       - run: 
+#           name: "Setup custom environment variables"
+#           command: |
+#             echo 'export FI1_BRIDGE_VERSION="v0.0.28"' >> $BASH_ENV
+#             echo 'export FI2_BRIDGE_VERSION="master"' >> $BASH_ENV
+
+#       - run: 
+#           name: "Check custom environment variables"
+#           command: |
+#             echo ${FI1_BRIDGE_VERSION}
+#             echo ${FI2_BRIDGE_VERSION}
+
+#       - checkout
+#       # - run: 
+#       #     name: Install node version
+#       #     command: |
+#       #       nvm install 7.10 
+#       #       nvm alias default 7.10
+#       # - run: 
+#       #     name: Install nvm
+#       #     command: |
+#       #       curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+#       #       export NVM_DIR="${XDG_CONFIG_HOME/:-$HOME/.}nvm"
+#       #       [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+#       #       command -v nvm
+#       #       nvm install 7.10
+#       #       nvm use node
+#       - run: npm install
+
+#       # - setup_remote_docker:
+#       - run: ./script.sh
 
       
