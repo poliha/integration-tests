@@ -44,6 +44,14 @@ jobs:
             echo ${FI2_BRIDGE_VERSION}
       - run_test  
 
+workflows:
+  version: 2
+
+  test_integration:
+    jobs:
+      - test_v28_master
+      - test_v29_master
+
 
 # jobs:
 #   build:
