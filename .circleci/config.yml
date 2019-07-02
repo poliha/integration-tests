@@ -48,7 +48,9 @@ workflows:
   test_integration:
     jobs:
       - test_v28_master
-      - test_v29_master
+      - test_v29_master:
+          requires:
+            - test_v28_master
 
 
 # jobs:
