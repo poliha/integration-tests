@@ -230,11 +230,61 @@ workflows:
 
   test_integration:
     jobs:
-      - test_v28_master
+      - test_v18_master:
+      - test_v19_master:
+          requires:
+            - test_v18_master
+      - test_v20_master:
+          requires:
+            - test_v19_master
+      - test_v21_master:
+          requires:
+            - test_v20_master            
+      - test_v22_master:
+          requires:
+            - test_v21_master            
+      - test_v23_master:
+          requires:
+            - test_v22_master            
+      - test_v24_master:
+          requires:
+            - test_v23_master            
+      - test_v25_master:
+          requires:
+            - test_v24_master            
+      - test_v26_master:
+          requires:
+            - test_v25_master            
+      - test_v27_master:
+          requires:
+            - test_v26_master            
+      - test_v28_master:
+          requires:
+            - test_v27_master
       - test_v29_master:
           requires:
             - test_v28_master
-
+      - test_v30_master:
+          requires:
+            - test_v29_master
+      - test_v31_master:
+          requires:
+            - test_v30_master            
+      - test_v32_master:
+          requires:
+            - test_v31_master            
+      - test_v32rc_v32rc:
+          requires:
+            - test_v32_master            
+      - test_v31_v32rc:
+          requires:
+            - test_v32rc_v32rc
+      - test_v32_v32:
+          requires:
+            - test_v31_v32rc
+      - test_master_master:
+          requires:
+            - test_v32_v32
 
 
 
