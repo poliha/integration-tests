@@ -5,11 +5,18 @@
 version: 2.1
 
 commands: 
-  bridgetest:
+  starttest:
     steps:
       - checkout
       - run: npm install
       - run: ./script.sh
+  checkenv:
+    steps:
+      - run: 
+          name: "Check custom environment variables"
+          command: |
+            echo ${FI1_BRIDGE_VERSION}
+            echo ${FI2_BRIDGE_VERSION} 
 
 jobs:
   test_v28_master:
@@ -21,12 +28,8 @@ jobs:
           command: |
             echo 'export FI1_BRIDGE_VERSION="v0.0.28"' >> $BASH_ENV
             echo 'export FI2_BRIDGE_VERSION="master"' >> $BASH_ENV
-      - run: 
-          name: "Check custom environment variables"
-          command: |
-            echo ${FI1_BRIDGE_VERSION}
-            echo ${FI2_BRIDGE_VERSION}
-      - bridgetest
+      - checkenv
+      - starttest
   test_v29_master:
     machine: true
     working_directory: ~/repo
@@ -36,12 +39,8 @@ jobs:
           command: |
             echo 'export FI1_BRIDGE_VERSION="v0.0.29"' >> $BASH_ENV
             echo 'export FI2_BRIDGE_VERSION="master"' >> $BASH_ENV
-      - run: 
-          name: "Check custom environment variables"
-          command: |
-            echo ${FI1_BRIDGE_VERSION}
-            echo ${FI2_BRIDGE_VERSION}
-      - bridgetest  
+      - checkenv
+      - starttest  
 
 workflows:
   version: 2
@@ -49,7 +48,7 @@ workflows:
   test_integration:
     jobs:
       - test_v28_master
-      # - test_v29_master
+      - test_v29_master
 
 
 # jobs:
