@@ -2,11 +2,10 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2
+version: 2.1
 
 commands: 
-
-  run_test:
+  bridgetest:
     steps:
       - checkout
       - run: npm install
@@ -27,7 +26,7 @@ jobs:
           command: |
             echo ${FI1_BRIDGE_VERSION}
             echo ${FI2_BRIDGE_VERSION}
-      - run_test
+      - bridgetest
   test_v29_master:
     machine: true
     working_directory: ~/repo
@@ -42,7 +41,7 @@ jobs:
           command: |
             echo ${FI1_BRIDGE_VERSION}
             echo ${FI2_BRIDGE_VERSION}
-      - run_test  
+      - bridgetest  
 
 workflows:
   version: 2
@@ -50,7 +49,7 @@ workflows:
   test_integration:
     jobs:
       - test_v28_master
-      - test_v29_master
+      # - test_v29_master
 
 
 # jobs:
