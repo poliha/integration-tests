@@ -223,14 +223,25 @@ jobs:
             echo 'export FI2_BRIDGE_VERSION="master"' >> $BASH_ENV
             echo 'export FI1_BRIDGE_VERSION="master"' >> $BASH_ENV
       - checkenv
-      - starttest       
+      - starttest   
+  test_v21_v32:
+    machine: true
+    working_directory: ~/repo
+    steps:
+      - run: 
+          name: "Setup custom environment variables"
+          command: |
+            echo 'export FI2_BRIDGE_VERSION="v0.0.32"' >> $BASH_ENV
+            echo 'export FI1_BRIDGE_VERSION="v0.0.21"' >> $BASH_ENV
+      - checkenv
+      - starttest          
 
 workflows:
   version: 2
 
   test_integration:
     jobs:
-      - test_v31_master
+      - test_v21_v32
       # - test_v18_master
       # - test_v19_master:
       #     requires:
