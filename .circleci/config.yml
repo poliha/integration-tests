@@ -230,7 +230,7 @@ workflows:
 
   test_integration:
     jobs:
-      - test_v21_master
+      - test_v31_master
       # - test_v18_master
       # - test_v19_master:
       #     requires:
